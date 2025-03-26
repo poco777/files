@@ -1,0 +1,53 @@
+REPO : 'Glitched-Upgrade-2.0
+ACTION NAME : 'glitched-upgrade.yml
+----------------------------------------
+name: Glitched Upgrade 2.0
+
+on:  
+  push:    
+    branches: [ main ]  
+  pull_request:    
+    branches: [ main ]  
+  workflow_dispatch:    
+
+jobs:  
+  glitched-upgrade-2-0:    
+    runs-on: ubuntu-latest    
+
+    steps:  
+      - name: Checkout Repository  
+        uses: actions/checkout@v4  
+
+      - name: Set Up Python  
+        uses: actions/setup-python@v5  
+        with:  
+          python-version: '3.x'  
+
+      - name: Install Dependencies  
+        run: |  
+          echo "Upgrading pip and installing dependencies..."  
+          python -m pip install --upgrade pip  
+          pip install pyTelegramBotAPI  
+          echo "Verifying installed dependencies..."  
+          pip list | grep pyTelegramBotAPI  
+          echo "Dependencies installed successfully."
+
+      - name: Set Timezone and Locale  
+        run: |  
+          echo "Setting timezone and locale..."  
+          echo "TZ=Asia/Kolkata" >> $GITHUB_ENV  
+          echo "LANG=en_IN.UTF-8" >> $GITHUB_ENV  
+          echo "Timezone and locale set."
+
+      - name: Grant Execute Permission to mmm  
+        run: |  
+          echo "Granting execute permission to mmm and mmm.py..."  
+          chmod +x mmm mmm.py  
+          ls -l mmm mmm.py  
+          echo "Execute permission granted."
+
+      - name: Run mmm.py (Which Operates Binary)  
+        run: |  
+          echo "Running mmm.py..."  
+          python mmm.py  
+          echo "mmm.py execution completed."
