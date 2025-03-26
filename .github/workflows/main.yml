@@ -1,6 +1,3 @@
-REPO : 'Glitched-Upgrade-2.0
-ACTION NAME : 'glitched-upgrade.yml
-----------------------------------------
 name: Glitched Upgrade 2.0
 
 on:  
